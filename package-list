@@ -1,0 +1,22 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:kotlinx.io/Buffer/equals/#kotlin.Any?/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]equals.html
+$dokka.location:kotlinx.io/Buffer/exhausted/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]exhausted.html
+$dokka.location:kotlinx.io/Buffer/hashCode/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]hash-code.html
+$dokka.location:kotlinx.io/Buffer/peek/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]peek.html
+$dokka.location:kotlinx.io/Buffer/read/#kotlin.ByteArray#kotlin.Int#kotlin.Int/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read.html
+$dokka.location:kotlinx.io/Buffer/read/#kotlinx.io.Buffer#kotlin.Long/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read.html
+$dokka.location:kotlinx.io/Buffer/readAll/#kotlinx.io.RawSink/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read-all.html
+$dokka.location:kotlinx.io/Buffer/readByte/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read-byte.html
+$dokka.location:kotlinx.io/Buffer/readFully/#kotlinx.io.RawSink#kotlin.Long/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read-fully.html
+$dokka.location:kotlinx.io/Buffer/readInt/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read-int.html
+$dokka.location:kotlinx.io/Buffer/readLong/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read-long.html
+$dokka.location:kotlinx.io/Buffer/readShort/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]read-short.html
+$dokka.location:kotlinx.io/Buffer/request/#kotlin.Long/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]request.html
+$dokka.location:kotlinx.io/Buffer/require/#kotlin.Long/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]require.html
+$dokka.location:kotlinx.io/Buffer/toString/#/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]to-string.html
+$dokka.location:kotlinx.io/Buffer/write/#kotlinx.io.Buffer#kotlin.Long/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]write.html
+$dokka.location:kotlinx.io/Buffer/writeAll/#kotlinx.io.RawSource/PointingToDeclaration/kotlinx-io-core/kotlinx.io/-buffer/[native]write-all.html
+module:kotlinx-io-core
+kotlinx.io
+kotlinx.io.files
