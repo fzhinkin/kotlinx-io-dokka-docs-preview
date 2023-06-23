@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>channel</title>
+    <title>asOutputStream</title>
 <link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -49,14 +49,14 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageids="kotlinx-io-core::kotlinx.io//channel/kotlinx.io.Buffer#/PointingToDeclaration//-373214303">
-  <div class="breadcrumbs"><a href="../index.html">kotlinx-io-core</a><span class="delimiter">/</span><a href="index.html">kotlinx.io</a><span class="delimiter">/</span><span class="current">channel</span></div>
+<div class="main-content" data-page-type="member" id="content" pageids="kotlinx-io-core::kotlinx.io//asOutputStream/kotlinx.io.Sink#/PointingToDeclaration//-373214303">
+  <div class="breadcrumbs"><a href="../index.html">kotlinx-io-core</a><span class="delimiter">/</span><a href="index.html">kotlinx.io</a><span class="delimiter">/</span><span class="current">asOutputStream</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>channel</span></span></h1>
+    <h1 class="cover"><span>as</span><wbr><span>Output</span><wbr><span><span>Stream</span></span></h1>
   </div>
   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/jvmMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/jvmMain" data-active="" data-toggle=":kotlinx-io-core:dokkaHtmlPartial/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-buffer/index.html#225705631%2FMain%2F-373214303">Buffer</a><span class="token punctuation">.</span><a href="channel.html"><span class="token function">channel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/ByteChannel.html">ByteChannel</a></div><p class="paragraph">Returns a new <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/ByteChannel.html">ByteChannel</a> instance representing this buffer.</p><hr><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-sink/index.html#-410502356%2FMain%2F-373214303">Sink</a><span class="token punctuation">.</span><a href="channel.html"><span class="token function">channel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/WritableByteChannel.html">WritableByteChannel</a></div><p class="paragraph">Returns <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/WritableByteChannel.html">WritableByteChannel</a> backed by this sink. Closing the channel will also close the sink.</p><hr><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-source/index.html#-1750292700%2FMain%2F-373214303">Source</a><span class="token punctuation">.</span><a href="channel.html"><span class="token function">channel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/ReadableByteChannel.html">ReadableByteChannel</a></div><p class="paragraph">Returns <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/ReadableByteChannel.html">ReadableByteChannel</a> backed by this source. Closing the source will close the source.</p></div>  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-sink/index.html">Sink</a><span class="token punctuation">.</span><a href="as-output-stream.html"><span class="token function">asOutputStream</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html">OutputStream</a></div><p class="paragraph">Returns an output stream that writes to this sink. Closing the stream will also close this sink.</p></div>  </div>
 </div>
       <div class="footer">
         <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
