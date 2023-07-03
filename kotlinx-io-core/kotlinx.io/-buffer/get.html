@@ -16,7 +16,7 @@
         }
     }
     </script>
-<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<script src="https://unpkg.com/kotlin-playground@1"></script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -34,7 +34,7 @@
     <div class="library-name">
 <a href="../../../index.html">
 <span>kotlinx-io</span>            </a>    </div>
-    <div>0.2.0-alpha-dev1
+    <div>0.2.0
     </div>
     <div class="pull-right d-flex">
         <div class="filter-section" id="filter-section">
@@ -54,7 +54,17 @@
   <div class="cover ">
     <h1 class="cover"><span><span>get</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html">Byte</a></div><p class="paragraph">Returns the byte at <a href="get.html">position</a>.</p><p class="paragraph">Use of this method may expose significant performance penalties and it's not recommended to use it for sequential access to a range of bytes within the buffer.</p><h4 class="">Throws</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html"><span>Index</span><wbr><span>Out</span><wbr><span>Of</span><wbr><span>Bounds</span><wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">when <a href="get.html">position</a> is negative or greater or equal to <a href="size.html">Buffer.size</a>.</p></div></div></div></div></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html">Byte</a></div><p class="paragraph">Returns the byte at <a href="get.html">position</a>.</p><p class="paragraph">Use of this method may expose significant performance penalties and it's not recommended to use it for sequential access to a range of bytes within the buffer.</p><h4 class="">Throws</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html"><span>Index</span><wbr><span>Out</span><wbr><span>Of</span><wbr><span>Bounds</span><wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">when <a href="get.html">position</a> is negative or greater or equal to <a href="size.html">Buffer.size</a>.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kotlinx.io.*
+import kotlin.test.*
+fun main() { 
+   //sampleStart 
+   val buffer = Buffer()
+buffer.writeString("Hello World!")
+
+assertEquals('H'.code, buffer[0].toInt())
+assertEquals('W'.code, buffer[buffer.indexOf('W'.code.toByte())].toInt()) 
+   //sampleEnd
+}</code></pre></div></div></div>
 </div>
       <div class="footer">
         <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>

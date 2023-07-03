@@ -16,7 +16,7 @@
         }
     }
     </script>
-<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<script src="https://unpkg.com/kotlin-playground@1"></script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -34,7 +34,7 @@
     <div class="library-name">
 <a href="../../../index.html">
 <span>kotlinx-io</span>            </a>    </div>
-    <div>0.2.0-alpha-dev1
+    <div>0.2.0
     </div>
     <div class="pull-right d-flex">
         <div class="filter-section" id="filter-section">
@@ -54,7 +54,19 @@
   <div class="cover ">
     <h1 class="cover"><span>transfer</span><wbr><span><span>To</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="transfer-to.html"><span class="token function">transferTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sink<span class="token operator">: </span><a href="../-raw-sink/index.html">RawSink</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Removes all bytes from this source, writes them to <a href="transfer-to.html">sink</a>, and returns the total number of bytes written to <a href="transfer-to.html">sink</a>.</p><p class="paragraph">Return 0 if this source is exhausted.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>sink</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the sink to which data will be written from this source.</p></div></div></div></div></div><h4 class="">Throws</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html"><span>Illegal</span><wbr><span>State</span><wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">when the source or <a href="transfer-to.html">sink</a> is closed.</p></div></div></div></div></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="transfer-to.html"><span class="token function">transferTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sink<span class="token operator">: </span><a href="../-raw-sink/index.html">RawSink</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Removes all bytes from this source, writes them to <a href="transfer-to.html">sink</a>, and returns the total number of bytes written to <a href="transfer-to.html">sink</a>.</p><p class="paragraph">Return 0 if this source is exhausted.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>sink</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the sink to which data will be written from this source.</p></div></div></div></div></div><h4 class="">Throws</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html"><span>Illegal</span><wbr><span>State</span><wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">when the source or <a href="transfer-to.html">sink</a> is closed.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kotlinx.io.*
+import kotlin.test.*
+fun main() { 
+   //sampleStart 
+   val src: Source = Buffer().also { it.writeString("Some data to transfer") }
+val dst = Buffer().also { it.writeString("Transferred: ") }
+
+src.transferTo(dst)
+
+assertTrue(src.exhausted())
+assertEquals("Transferred: Some data to transfer", dst.readString()) 
+   //sampleEnd
+}</code></pre></div></div></div>
 </div>
       <div class="footer">
         <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
