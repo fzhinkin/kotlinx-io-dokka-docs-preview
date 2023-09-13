@@ -34,10 +34,11 @@
     <div class="library-name">
 <a href="../../../index.html">
 <span>kotlinx-io</span>            </a>    </div>
-    <div>0.2.0
+    <div>0.3.0
     </div>
     <div class="pull-right d-flex">
         <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kotlinx-io-core:dokkaHtmlPartial/appleMain">apple</button>
                 <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kotlinx-io-core:dokkaHtmlPartial/commonMain">common</button>
                 <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kotlinx-io-core:dokkaHtmlPartial/jvmMain">jvm</button>
         </div>
@@ -54,7 +55,7 @@
   <div class="breadcrumbs"><a href="../../index.html">kotlinx-io-core</a><span class="delimiter">/</span><a href="../index.html">kotlinx.io</a><span class="delimiter">/</span><span class="current">Sink</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Sink</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Sink</a> : <a href="../-raw-sink/index.html">RawSink</a></div><p class="paragraph">A sink that facilitates typed data writes and keeps a buffer internally so that caller can write some data without sending it directly to an upstream.</p><p class="paragraph"><a href="index.html">Sink</a> is the main <code class="lang-kotlin">kotlinx-io</code> interface to write data in client's code, any <a href="../-raw-sink/index.html">RawSink</a> could be turned into <a href="index.html">Sink</a> using <a href="../buffered.html">RawSink.buffered</a>.</p><p class="paragraph">Depending on the kind of upstream and the number of bytes written, buffering may improve the performance by hiding the latency of small writes.</p><p class="paragraph">Data stored inside the internal buffer could be sent to an upstream using <a href="flush.html">flush</a>, <a href="emit.html">emit</a>, or <a href="hint-emit.html">hintEmit</a>:</p><ul><li><p class="paragraph"><a href="flush.html">flush</a> writes the whole buffer to an upstream and then flushes the upstream.</p></li><li><p class="paragraph"><a href="emit.html">emit</a> writes all data from the buffer into the upstream without flushing it.</p></li><li><p class="paragraph"><a href="hint-emit.html">hintEmit</a> hints the source that current write operation is now finished and a part of data from the buffer may be partially emitted into the upstream. The latter is aimed to reduce memory footprint by keeping the buffer as small as possible without excessive writes to the upstream. All write operations implicitly calls <a href="hint-emit.html">hintEmit</a>.</p></li></ul><h3 class=""> Write methods' behavior and naming conventions</h3><p class="paragraph">Methods writing a value of some type are usually name <code class="lang-kotlin">write&lt;Type&gt;</code>, like <a href="write-byte.html">writeByte</a> or <a href="write-int.html">writeInt</a>, except methods writing data from a some collection of bytes, like <code class="lang-kotlin">write(ByteArray, Int, Int)</code> or <code class="lang-kotlin">write(source: RawSource, byteCount: Long)</code>. In the latter case, if a collection is consumable (i.e., once data was read from it will no longer be available for reading again), write method will consume as many bytes as it was requested to write.</p><p class="paragraph">Methods fully consuming its argument are named <code class="lang-kotlin">transferFrom</code>, like <a href="transfer-from.html">transferFrom</a>.</p><p class="paragraph">It is recommended to follow the same naming convention for Sink extensions.</p><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-buffer/index.html">Buffer</a></div></span></div><div></div></div></div></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Sink</a> : <a href="../-raw-sink/index.html">RawSink</a></div><p class="paragraph">A sink that facilitates typed data writes and keeps a buffer internally so that caller can write some data without sending it directly to an upstream.</p><p class="paragraph"><a href="index.html">Sink</a> is the main <code class="lang-kotlin">kotlinx-io</code> interface to write data in client's code, any <a href="../-raw-sink/index.html">RawSink</a> could be turned into <a href="index.html">Sink</a> using <a href="../buffered.html">RawSink.buffered</a>.</p><p class="paragraph">Depending on the kind of upstream and the number of bytes written, buffering may improve the performance by hiding the latency of small writes.</p><p class="paragraph">Data stored inside the internal buffer could be sent to an upstream using <a href="flush.html">flush</a>, <a href="emit.html">emit</a>, or <a href="hint-emit.html">hintEmit</a>:</p><ul><li><p class="paragraph"><a href="flush.html">flush</a> writes the whole buffer to an upstream and then flushes the upstream.</p></li><li><p class="paragraph"><a href="emit.html">emit</a> writes all data from the buffer into the upstream without flushing it.</p></li><li><p class="paragraph"><a href="hint-emit.html">hintEmit</a> hints the source that current write operation is now finished and a part of data from the buffer may be partially emitted into the upstream. The latter is aimed to reduce memory footprint by keeping the buffer as small as possible without excessive writes to the upstream. All write operations implicitly calls <a href="hint-emit.html">hintEmit</a>.</p></li></ul><h3 class=""> Write methods' behavior and naming conventions</h3><p class="paragraph">Methods writing a value of some type are usually named <code class="lang-kotlin">write&lt;Type&gt;</code>, like <a href="write-byte.html">writeByte</a> or <a href="write-int.html">writeInt</a>, except methods writing data from a some collection of bytes, like <code class="lang-kotlin">write(ByteArray, Int, Int)</code> or <code class="lang-kotlin">write(source: RawSource, byteCount: Long)</code>. In the latter case, if a collection is consumable (i.e., once data was read from it will no longer be available for reading again), write method will consume as many bytes as it was requested to write.</p><p class="paragraph">Methods fully consuming its argument are named <code class="lang-kotlin">transferFrom</code>, like <a href="transfer-from.html">transferFrom</a>.</p><p class="paragraph">It is recommended to follow the same naming convention for Sink extensions.</p><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-buffer/index.html">Buffer</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
@@ -93,6 +94,23 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/jvmMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/jvmMain" data-active="" data-toggle=":kotlinx-io-core:dokkaHtmlPartial/jvmMain">jvm</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">Sink</a><span class="token punctuation">.</span><a href="../as-byte-channel.html"><span class="token function">asByteChannel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/WritableByteChannel.html">WritableByteChannel</a></div><div class="brief "><p class="paragraph">Returns <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/WritableByteChannel.html">WritableByteChannel</a> backed by this sink. Closing the channel will also close the sink.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2118113768%2FFunctions%2F-617736777" anchor-label="asNSOutputStream" id="-2118113768%2FFunctions%2F-617736777" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/appleMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/appleMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/appleMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../as-n-s-output-stream.html"><span>as</span><wbr><span>NSOutput</span><wbr><span><span>Stream</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2118113768%2FFunctions%2F-617736777"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/appleMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/appleMain" data-active="" data-toggle=":kotlinx-io-core:dokkaHtmlPartial/appleMain">apple</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/appleMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-410502356%2FMain%2F-617736777">Sink</a><span class="token punctuation">.</span><a href="../as-n-s-output-stream.html"><span class="token function">asNSOutputStream</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="platform.Foundation/NSOutputStream///PointingToDeclaration/">NSOutputStream</span></div><div class="brief "><p class="paragraph">Returns an output stream that writes to this sink. Closing the stream will also close this sink.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -262,6 +280,66 @@
               <div>
                 <div class="title">
                   <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">Sink</a><span class="token punctuation">.</span><a href="../write-decimal-long.html"><span class="token function">writeDecimalLong</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">long<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes <a href="../write-decimal-long.html">long</a> to this sink in signed decimal form (i.e., as a string in base 10).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2032314478%2FFunctions%2F-15943755" anchor-label="writeDouble" id="2032314478%2FFunctions%2F-15943755" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../write-double.html"><span>write</span><wbr><span><span>Double</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032314478%2FFunctions%2F-15943755"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">Sink</a><span class="token punctuation">.</span><a href="../write-double.html"><span class="token function">writeDouble</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">double<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes eight bytes of a bit representation of <a href="../write-double.html">double</a>, in the big-endian order, to this sink. Bit representation of the <a href="../write-double.html">double</a> corresponds to the IEEE 754 floating-point "double format" bit layout.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1962613451%2FFunctions%2F-15943755" anchor-label="writeDoubleLe" id="-1962613451%2FFunctions%2F-15943755" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../write-double-le.html"><span>write</span><wbr><span>Double</span><wbr><span><span>Le</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1962613451%2FFunctions%2F-15943755"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">Sink</a><span class="token punctuation">.</span><a href="../write-double-le.html"><span class="token function">writeDoubleLe</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">double<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes eight bytes of a bit representation of <a href="../write-double-le.html">double</a>, in the little-endian order, to this sink. Bit representation of the <a href="../write-double-le.html">double</a> corresponds to the IEEE 754 floating-point "double format" bit layout.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1913263186%2FFunctions%2F-15943755" anchor-label="writeFloat" id="-1913263186%2FFunctions%2F-15943755" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../write-float.html"><span>write</span><wbr><span><span>Float</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1913263186%2FFunctions%2F-15943755"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">Sink</a><span class="token punctuation">.</span><a href="../write-float.html"><span class="token function">writeFloat</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">float<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes four bytes of a bit representation of <a href="../write-float.html">float</a>, in the big-endian order, to this sink. Bit representation of the <a href="../write-float.html">float</a> corresponds to the IEEE 754 floating-point "single format" bit layout.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1079899207%2FFunctions%2F-15943755" anchor-label="writeFloatLe" id="1079899207%2FFunctions%2F-15943755" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../write-float-le.html"><span>write</span><wbr><span>Float</span><wbr><span><span>Le</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1079899207%2FFunctions%2F-15943755"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">Sink</a><span class="token punctuation">.</span><a href="../write-float-le.html"><span class="token function">writeFloatLe</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">float<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes four bytes of a bit representation of <a href="../write-float-le.html">float</a>, in the little-endian order, to this sink. Bit representation of the <a href="../write-float-le.html">float</a> corresponds to the IEEE 754 floating-point "single format" bit layout.</p></div></div></div>
                 </div>
               </div>
             </div>
