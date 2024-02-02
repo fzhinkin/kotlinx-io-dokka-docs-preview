@@ -1,9 +1,11 @@
 <!doctype html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Sink</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
@@ -16,12 +18,13 @@
         }
     }
     </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
-<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
@@ -29,33 +32,39 @@
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-<a href="../../../index.html">
-<span>kotlinx-io</span>            </a>    </div>
-    <div>0.3.0
-    </div>
-    <div class="pull-right d-flex">
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../../index.html">
+                            kotlinx-io
+                    </a>            </div>
+            <div class="library-version">0.3.1
+            </div>
+        </div>
         <div class="filter-section" id="filter-section">
                 <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kotlinx-io-core:dokkaHtmlPartial/appleMain">apple</button>
                 <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kotlinx-io-core:dokkaHtmlPartial/commonMain">common</button>
                 <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kotlinx-io-core:dokkaHtmlPartial/jvmMain">jvm</button>
         </div>
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
-        <div id="searchBar"></div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
-        <div id="sideMenu"></div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
     </div>
-    <div id="main">
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kotlinx-io-core::kotlinx.io/Sink///PointingToDeclaration//-15943755">
   <div class="breadcrumbs"><a href="../../index.html">kotlinx-io-core</a><span class="delimiter">/</span><a href="../index.html">kotlinx.io</a><span class="delimiter">/</span><span class="current">Sink</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Sink</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Sink</a> : <a href="../-raw-sink/index.html">RawSink</a></div><p class="paragraph">A sink that facilitates typed data writes and keeps a buffer internally so that caller can write some data without sending it directly to an upstream.</p><p class="paragraph"><a href="index.html">Sink</a> is the main <code class="lang-kotlin">kotlinx-io</code> interface to write data in client's code, any <a href="../-raw-sink/index.html">RawSink</a> could be turned into <a href="index.html">Sink</a> using <a href="../buffered.html">RawSink.buffered</a>.</p><p class="paragraph">Depending on the kind of upstream and the number of bytes written, buffering may improve the performance by hiding the latency of small writes.</p><p class="paragraph">Data stored inside the internal buffer could be sent to an upstream using <a href="flush.html">flush</a>, <a href="emit.html">emit</a>, or <a href="hint-emit.html">hintEmit</a>:</p><ul><li><p class="paragraph"><a href="flush.html">flush</a> writes the whole buffer to an upstream and then flushes the upstream.</p></li><li><p class="paragraph"><a href="emit.html">emit</a> writes all data from the buffer into the upstream without flushing it.</p></li><li><p class="paragraph"><a href="hint-emit.html">hintEmit</a> hints the source that current write operation is now finished and a part of data from the buffer may be partially emitted into the upstream. The latter is aimed to reduce memory footprint by keeping the buffer as small as possible without excessive writes to the upstream. All write operations implicitly calls <a href="hint-emit.html">hintEmit</a>.</p></li></ul><h3 class=""> Write methods' behavior and naming conventions</h3><p class="paragraph">Methods writing a value of some type are usually named <code class="lang-kotlin">write&lt;Type&gt;</code>, like <a href="write-byte.html">writeByte</a> or <a href="write-int.html">writeInt</a>, except methods writing data from a some collection of bytes, like <code class="lang-kotlin">write(ByteArray, Int, Int)</code> or <code class="lang-kotlin">write(source: RawSource, byteCount: Long)</code>. In the latter case, if a collection is consumable (i.e., once data was read from it will no longer be available for reading again), write method will consume as many bytes as it was requested to write.</p><p class="paragraph">Methods fully consuming its argument are named <code class="lang-kotlin">transferFrom</code>, like <a href="transfer-from.html">transferFrom</a>.</p><p class="paragraph">It is recommended to follow the same naming convention for Sink extensions.</p><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-buffer/index.html">Buffer</a></div></span></div><div></div></div></div></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Sink</a> : <a href="../-raw-sink/index.html">RawSink</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/kotlin/kotlinx-io/tree/master/core/common/src/Sink.kt#L54">source</a>)</span></span></div><p class="paragraph">A sink that facilitates typed data writes and keeps a buffer internally so that caller can write some data without sending it directly to an upstream.</p><p class="paragraph"><a href="index.html">Sink</a> is the main <code class="lang-kotlin">kotlinx-io</code> interface to write data in client's code, any <a href="../-raw-sink/index.html">RawSink</a> could be turned into <a href="index.html">Sink</a> using <a href="../buffered.html">RawSink.buffered</a>.</p><p class="paragraph">Depending on the kind of upstream and the number of bytes written, buffering may improve the performance by hiding the latency of small writes.</p><p class="paragraph">Data stored inside the internal buffer could be sent to an upstream using <a href="flush.html">flush</a>, <a href="emit.html">emit</a>, or <a href="hint-emit.html">hintEmit</a>:</p><ul><li><p class="paragraph"><a href="flush.html">flush</a> writes the whole buffer to an upstream and then flushes the upstream.</p></li><li><p class="paragraph"><a href="emit.html">emit</a> writes all data from the buffer into the upstream without flushing it.</p></li><li><p class="paragraph"><a href="hint-emit.html">hintEmit</a> hints the source that current write operation is now finished and a part of data from the buffer may be partially emitted into the upstream. The latter is aimed to reduce memory footprint by keeping the buffer as small as possible without excessive writes to the upstream. All write operations implicitly calls <a href="hint-emit.html">hintEmit</a>.</p></li></ul><h3 class=""> Write methods' behavior and naming conventions</h3><p class="paragraph">Methods writing a value of some type are usually named <code class="lang-kotlin">write&lt;Type&gt;</code>, like <a href="write-byte.html">writeByte</a> or <a href="write-int.html">writeInt</a>, except methods writing data from a some collection of bytes, like <code class="lang-kotlin">write(ByteArray, Int, Int)</code> or <code class="lang-kotlin">write(source: RawSource, byteCount: Long)</code>. In the latter case, if a collection is consumable (i.e., once data was read from it will no longer be available for reading again), write method will consume as many bytes as it was requested to write.</p><p class="paragraph">Methods fully consuming its argument are named <code class="lang-kotlin">transferFrom</code>, like <a href="transfer-from.html">transferFrom</a>.</p><p class="paragraph">It is recommended to follow the same naming convention for Sink extensions.</p><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":kotlinx-io-core:dokkaHtmlPartial/commonMain" data-filterable-set=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-buffer/index.html">Buffer</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
@@ -592,10 +601,11 @@
   </div>
 </div>
       <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>
 
