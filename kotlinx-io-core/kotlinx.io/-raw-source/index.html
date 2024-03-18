@@ -41,7 +41,7 @@
 <a class="library-name--link" href="../../../index.html">
                             kotlinx-io
                     </a>            </div>
-            <div class="library-version">0.3.1
+            <div class="library-version">0.3.2
             </div>
         </div>
         <div class="filter-section" id="filter-section">
@@ -62,77 +62,10 @@
   <div class="breadcrumbs"><a href="../../index.html">kotlinx-io-core</a><span class="delimiter">/</span><a href="../index.html">kotlinx.io</a><span class="delimiter">/</span><span class="current">RawSource</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Raw</span><wbr><span><span>Source</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">RawSource</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-auto-closeable/index.html">AutoCloseable</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/kotlin/kotlinx-io/tree/master/core/common/src/RawSource.kt#L39">source</a>)</span></span></div><p class="paragraph">Supplies a stream of bytes. RawSource is a base interface for <code class="lang-kotlin">kotlinx-io</code> data suppliers.</p><p class="paragraph">The interface should be implemented to read data from wherever it's located: from the network, storage, or a buffer in memory. Sources may be layered to transform supplied data, such as to decompress, decrypt, or remove protocol framing.</p><p class="paragraph">Most applications shouldn't operate on a raw source directly, but rather on a buffered <a href="../-source/index.html">Source</a> which is both more efficient and more convenient. Use <a href="../buffered.html">buffered</a> to wrap any raw source with a buffer.</p><p class="paragraph">Implementors should abstain from throwing exceptions other than those that are documented for RawSource methods.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kotlinx.io.*
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">RawSource</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-auto-closeable/index.html">AutoCloseable</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/kotlin/kotlinx-io/tree/master/core/common/src/RawSource.kt#L39">source</a>)</span></span></div><p class="paragraph">Supplies a stream of bytes. RawSource is a base interface for <code class="lang-kotlin">kotlinx-io</code> data suppliers.</p><p class="paragraph">The interface should be implemented to read data from wherever it's located: from the network, storage, or a buffer in memory. Sources may be layered to transform supplied data, such as to decompress, decrypt, or remove protocol framing.</p><p class="paragraph">Most applications shouldn't operate on a raw source directly, but rather on a buffered <a href="../-source/index.html">Source</a> which is both more efficient and more convenient. Use <a href="../buffered.html">buffered</a> to wrap any raw source with a buffer.</p><p class="paragraph">Implementors should abstain from throwing exceptions other than those that are documented for RawSource methods.</p><h4 class="">Samples</h4>kotlinx.io.samples.RC4DecryptingSource<div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kotlinx.io.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
-fun main() { 
-   //sampleStart 
-   /**
- * Source decrypting all the data read from the downstream using RC4 algorithm.
- *
- * See https://en.wikipedia.org/wiki/RC4 for more information about the cypher.
- *
- * Implementation of RC4 stream cypher based on http://cypherpunks.venona.com/archive/1994/09/msg00304.html
- */
-@OptIn(ExperimentalUnsignedTypes::class)
-class RC4DecryptingSource(private val downstream: RawSource, key: String): RawSource {
-    private val buffer = Buffer()
-    private val key = RC4Key(key)
 
-    override fun readAtMostTo(sink: Buffer, byteCount: Long): Long {
-        val bytesRead = downstream.readAtMostTo(buffer, byteCount)
-        if (bytesRead == -1L) {
-            return -1L
-        }
-
-        while (!buffer.exhausted()) {
-            val byte = buffer.readByte()
-            sink.writeByte(byte.xor(key.nextByte()))
-        }
-
-        return bytesRead
-    }
-
-    override fun close() = downstream.close()
-
-    private class RC4Key(key: String) {
-        private var keyState: UByteArray
-        private var keyX: Int = 0
-        private var keyY: Int = 0
-
-        init {
-            require(key.isNotEmpty()) { "Key could not be empty" }
-            val keyBytes = key.encodeToByteArray()
-            keyState = UByteArray(256) { it.toUByte() }
-            var index1 = 0
-            var index2 = 0
-
-            for (idx in keyState.indices) {
-                index2 = (keyBytes[index1] + keyState[idx].toInt() + index2) % 256
-                swapStateBytes(idx, index2)
-                index1 = (index1 + 1) % keyBytes.size
-            }
-        }
-
-        fun nextByte(): Byte {
-            keyX = (keyX + 1) % 256
-            keyY = (keyState[keyX].toInt() + keyY) % 256
-            swapStateBytes(keyX, keyY)
-            val idx = (keyState[keyX] + keyState[keyY]) % 256U
-            return keyState[idx.toInt()].toByte()
-        }
-
-        private fun swapStateBytes(x: Int, y: Int) {
-            val tmp = keyState[x]
-            keyState[x] = keyState[y]
-            keyState[y] = tmp
-        }
-    }
-} 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kotlinx.io.*
-import kotlin.test.Test
-import kotlin.test.assertEquals
 fun main() { 
    //sampleStart 
    val key = "key"
@@ -158,7 +91,7 @@ assertEquals("Secret", rc4Source.readString())
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">RawSource</a><span class="token punctuation">.</span><a href="../buffered.html"><span class="token function">buffered</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-source/index.html">Source</a></div><div class="brief "><p class="paragraph">Returns a new source that buffers reads from the source. The returned source will perform bulk reads into its in-memory buffer. Use this wherever you read a source to get ergonomic and efficient access to data.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">RawSource</a><span class="token punctuation">.</span><a href="../buffered.html"><span class="token function">buffered</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-source/index.html">Source</a></div><div class="brief "><p class="paragraph">Returns a new source that buffers reads from the source. The returned source will perform bulk reads into its in-memory buffer. Use this wherever you read a source to get ergonomic and efficient access to data.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -188,7 +121,7 @@ assertEquals("Secret", rc4Source.readString())
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="read-at-most-to.html"><span class="token function">readAtMostTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sink<span class="token operator">: </span><a href="../-buffer/index.html">Buffer</a><span class="token punctuation">, </span></span><span class="parameter ">byteCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Removes at least 1, and up to <a href="read-at-most-to.html">byteCount</a> bytes from this source and appends them to <a href="read-at-most-to.html">sink</a>. Returns the number of bytes read, or -1 if this source is exhausted.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kotlinx-io-core:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="read-at-most-to.html"><span class="token function">readAtMostTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sink<span class="token operator">: </span><a href="../-buffer/index.html">Buffer</a><span class="token punctuation">, </span></span><span class="parameter ">byteCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Removes at least 1, and up to <a href="read-at-most-to.html">byteCount</a> bytes from this source and appends them to <a href="read-at-most-to.html">sink</a>. Returns the number of bytes read, or -1 if this source is exhausted.</p></div></div></div>
                 </div>
               </div>
             </div>
